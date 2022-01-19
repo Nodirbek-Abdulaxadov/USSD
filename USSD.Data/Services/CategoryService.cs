@@ -46,9 +46,14 @@ namespace USSD.Data.Services
             return json;
         }
 
-        public Task<Category> GetCategory(int id)
+        public async Task<Category> GetCategory(int id)
         {
-            return _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+           var json = await _dbContext.Categories
+                .Include(sc => sc.SubCategories)
+                .ThenInclude(p => p.Products)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return json;
         }
 
         public Task<Category> UpdateCategory(Category category)

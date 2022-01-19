@@ -32,7 +32,13 @@ namespace USSD.Data.Services
 
         public async Task<Operator> GetOperator(int id)
         {
-            return await _dbContext.Operators.FirstOrDefaultAsync(op => op.Id == id);
+            var json = await _dbContext.Operators
+                .Include(c => c.Categories)
+                .ThenInclude(sc => sc.SubCategories)
+                .ThenInclude(p => p.Products)
+                .FirstOrDefaultAsync(op => op.Id == id);
+
+            return json;
         }
 
         public Task<List<Operator>> GetOperators()

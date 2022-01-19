@@ -32,7 +32,10 @@ namespace USSD.Data.Services
 
         public async Task<SubCategory> GetSubCategory(int id)
         {
-            return await _dbContext.SubCategories.FirstOrDefaultAsync(op => op.Id == id);
+            var json = await _dbContext.SubCategories
+                .Include(p => p.Products)
+                .FirstOrDefaultAsync(op => op.Id == id);
+            return json;
         }
 
         public Task<List<SubCategory>> GetSubCategories()
