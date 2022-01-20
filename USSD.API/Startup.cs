@@ -34,18 +34,15 @@ namespace USSD.API
             services.AddTransient<ISubCategoryService, SubCategoryService>();
             services.AddTransient<IProductService, ProductService>();
 
-            services.AddDbContext<AppDbContext>(option =>
-                option.UseNpgsql(Configuration.GetConnectionString("PostgreDB")));
-
-            //services.AddDbContext<AppDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "USSD.API", Version = "v1" });
             });
-        }
+        }   
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
