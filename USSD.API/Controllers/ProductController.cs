@@ -30,7 +30,7 @@ namespace USSD.API.Controllers
                 {
                     Success = true,
                     StatusCode = HttpStatusCode.OK,
-                    Messages = "Kategoriyalar ro'yxati",
+                    Messages = "Barcha productlar ro'yxati",
                     Data = categories
                 };
 
@@ -60,7 +60,7 @@ namespace USSD.API.Controllers
                 {
                     Success = true,
                     StatusCode = HttpStatusCode.OK,
-                    Messages = "Kategoriyalar ro'yxati",
+                    Messages = "Tanlangan product",
                     Data = categories
                 };
 

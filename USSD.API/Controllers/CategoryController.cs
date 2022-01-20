@@ -102,7 +102,7 @@ namespace USSD.API.Controllers
                 {
                     Success = true,
                     StatusCode = HttpStatusCode.OK,
-                    Messages = "Kategoriyalar ro'yxati",
+                    Messages = "Tanlangan kategoriya",
                     Data = category
                 };
 

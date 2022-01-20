@@ -71,7 +71,7 @@ namespace USSD.API.Controllers
                 {
                     Success = true,
                     StatusCode = HttpStatusCode.OK,
-                    Messages = "Kategoriyalar ro'yxati",
+                    Messages = "SubKategoriyalar ro'yxati",
                     Data = list
                 };
 
@@ -101,7 +101,7 @@ namespace USSD.API.Controllers
                 {
                     Success = true,
                     StatusCode = HttpStatusCode.OK,
-                    Messages = "Subkategoriyalar ro'yxati",
+                    Messages = "Tanlangan Subkategoriya",
                     Data = categories
                 };
 
