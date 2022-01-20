@@ -18,11 +18,11 @@ namespace USSD.Data.Models
         public string TitleRu { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(5000)]
         public string DescriptionUz { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(5000)]
         public string DescriptionRu { get; set; }
 
         [Required]

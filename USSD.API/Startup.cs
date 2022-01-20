@@ -33,6 +33,7 @@ namespace USSD.API
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ISubCategoryService, SubCategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IMixedService, MixedService>();
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")));

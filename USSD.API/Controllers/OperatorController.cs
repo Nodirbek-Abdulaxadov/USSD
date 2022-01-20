@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Nancy.Json;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
+using USSD.API.ApiModels;
 using USSD.Data.Models;
 using USSD.Data.Services;
 
@@ -20,42 +25,103 @@ namespace USSD.API.Controllers
         [HttpGet, Route("getall/json")]
         public async Task<IActionResult> GetAllJsonAsync()
         {
-            var contacts = await _service.GetOperatorsJson();
-            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
+            try
+            {
+                var operators = await _service.GetOperatorsJson();                
 
-            return Ok(json);
-            //StatusCode(200, json);
+                var res = new
+                {
+                    Success = true,
+                    StatusCode = HttpStatusCode.OK,
+                    Messages = "Barcha operatorlar ro'yxati batafsil",
+                    Data = operators
+                };
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    Success = false,
+                    Error_code = HttpStatusCode.NotFound,
+                    Messages = ex.Message.ToString(),
+                    Data = ""
+                };
+
+                return NotFound(res);
+            }
         }
 
         [HttpGet, Route("getall")]
         public async Task<IActionResult> GetAllAsync()
         {
-            var contacts = await _service.GetOperators();
-            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
-                new JsonSerializerSettings
+            try
+            {
+                var operators = await _service.GetOperators();
+                List<OperatorModel> list = new List<OperatorModel>();
+                foreach (var o in operators)
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
+                    OperatorModel operatorModel = new OperatorModel()
+                    {
+                        Id = o.Id,
+                        OpeatorName = o.OpeatorName
+                    };
+                    list.Add(operatorModel);
+                }
+                var res = new
+                {
+                    Success = true,
+                    StatusCode = HttpStatusCode.OK,
+                    Messages = "Operatorlar ro'yxati",
+                    Data = list
+                };
 
-            return Ok(json);
-                //StatusCode(200, json);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    Success = false,
+                    Error_code = HttpStatusCode.NotFound,
+                    Messages = ex.Message.ToString(),
+                    Data = ""
+                };
+
+                return NotFound(res);
+            }
         }
 
         [HttpGet, Route("get/{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            var contacts = await _service.GetOperator(id);
-            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
+            try
+            {
+                var operatr = await _service.GetOperator(id);
 
-            return Ok(json);
+                var res = new
+                {
+                    Success = true,
+                    StatusCode = HttpStatusCode.OK,
+                    Messages = "Tanlangan operator",
+                    Data = operatr
+                };
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    Success = false,
+                    Error_code = HttpStatusCode.NotFound,
+                    Messages = ex.Message.ToString(),
+                    Data = ""
+                };
+
+                return NotFound(res);
+            }
         }
     }
 }
