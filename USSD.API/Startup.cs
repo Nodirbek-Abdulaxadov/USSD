@@ -36,7 +36,7 @@ namespace USSD.API
             services.AddTransient<IMixedService, MixedService>();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")));
+                options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")), ServiceLifetime.Scoped);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
