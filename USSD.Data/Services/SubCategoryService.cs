@@ -17,19 +17,6 @@ namespace USSD.Data.Services
         {
             _dbContext = dbContext;
         }
-        public Task<SubCategory> AddSubCategory(SubCategory subCategory)
-        {
-            _dbContext.SubCategories.AddAsync(subCategory);
-            _dbContext.SaveChangesAsync();
-            return Task.FromResult(subCategory);
-        }
-
-        public async Task DeleteSubCategory(int id)
-        {
-            _dbContext.SubCategories.Remove(await _dbContext.SubCategories.FirstOrDefaultAsync(o => o.Id == id));
-            await _dbContext.SaveChangesAsync();
-        }
-
         public async Task<SubCategory> GetSubCategory(int id)
         {
             var json = await _dbContext.SubCategories
@@ -43,13 +30,6 @@ namespace USSD.Data.Services
             return _dbContext.SubCategories.ToListAsync();
         }
 
-        public Task<SubCategory> UpdateSubCategory(SubCategory subCategory)
-        {
-            _dbContext.SubCategories.Update(subCategory);
-            _dbContext.SaveChangesAsync();
-            return Task.FromResult(subCategory);
-        }
-
         public Task<List<SubCategory>> GetSubCategoriesJson()
         {
             var json = _dbContext.SubCategories
@@ -57,6 +37,11 @@ namespace USSD.Data.Services
                 .ToListAsync();
 
             return json;
+        }
+
+        public Task<List<SubCategory>> GetAllByCategoryId(int categoryId)
+        {
+            return _dbContext.SubCategories.Where(sc => sc.CategoryId == categoryId).ToListAsync();
         }
     }
 }

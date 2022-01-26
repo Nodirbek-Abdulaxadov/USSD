@@ -40,6 +40,12 @@ namespace USSD.Data.Services
             return _dbContext.Products.ToListAsync();
         }
 
+        public async Task<List<Product>> GetProductsBySubCategory(int subId)
+        {
+            var result = await _dbContext.Products.Where(p => p.SubCategoryId == subId).ToListAsync();
+            return result;
+        }
+
         public Task<Product> UpdateProduct(Product operatr)
         {
             _dbContext.Products.Update(operatr);

@@ -6,11 +6,9 @@ namespace USSD.Data.Services
 {
     public interface ISubCategoryService
     {
+        Task<List<SubCategory>> GetAllByCategoryId(int categoryId);
         Task<List<SubCategory>> GetSubCategories();
         Task<List<SubCategory>> GetSubCategoriesJson();
         Task<SubCategory> GetSubCategory(int id);
-        Task<SubCategory> AddSubCategory(SubCategory subCategory);
-        Task<SubCategory> UpdateSubCategory(SubCategory subCategory);
-        Task DeleteSubCategory(int id);
     }
 }

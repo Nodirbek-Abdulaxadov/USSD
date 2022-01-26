@@ -20,6 +20,36 @@ namespace USSD.API.Controllers
             _service = service;
         }
 
+        [HttpGet, Route("getall/{subCategoryId}")]
+        public async Task<IActionResult> GetAllBySCIdAsync(int subCategoryId)
+        {
+            try
+            {
+                var categories = await _service.GetProductsBySubCategory(subCategoryId);
+                var res = new
+                {
+                    Success = true,
+                    StatusCode = HttpStatusCode.OK,
+                    Messages = "Tanlangan subkategoriyaga tegishli barcha productlar ro'yxati",
+                    Data = categories
+                };
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    Success = false,
+                    Error_code = HttpStatusCode.NotFound,
+                    Messages = ex.Message.ToString(),
+                    Data = ""
+                };
+
+                return NotFound(res);
+            }
+        }
+
         [HttpGet, Route("getall")]
         public async Task<IActionResult> GetAllAsync()
         {

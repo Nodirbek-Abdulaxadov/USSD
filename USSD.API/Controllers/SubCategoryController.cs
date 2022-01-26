@@ -41,7 +41,48 @@ namespace USSD.API.Controllers
                 var res = new
                 {
                     Success = false,
-                    Error_code = HttpStatusCode.NotFound,
+                    Error_code = HttpStatusCode.InternalServerError,
+                    Messages = ex.Message.ToString(),
+                    Data = ""
+                };
+
+                return NotFound(res);
+            }
+        }
+
+        [HttpGet, Route("getall/{categoryId}")]
+        public async Task<IActionResult> GetAllByCategoryIdAsync(int categoryId)
+        {
+            try
+            {
+                var categories = await _service.GetAllByCategoryId(categoryId);
+                List<SubCategoryModel> list = new List<SubCategoryModel>();
+                foreach (var o in categories)
+                {
+                    SubCategoryModel subcategoryModel = new SubCategoryModel()
+                    {
+                        Id = o.Id,
+                        SubCategoryName = o.SubCategoryName,
+                        CategoryId = o.CategoryId
+                    };
+                    list.Add(subcategoryModel);
+                }
+                var res = new
+                {
+                    Success = true,
+                    StatusCode = HttpStatusCode.OK,
+                    Messages = "Tanlangan kategoriyaga tegishli barcha subKategoriyalar ro'yxati",
+                    Data = list
+                };
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    Success = false,
+                    Error_code = HttpStatusCode.InternalServerError,
                     Messages = ex.Message.ToString(),
                     Data = ""
                 };
@@ -82,7 +123,7 @@ namespace USSD.API.Controllers
                 var res = new
                 {
                     Success = false,
-                    Error_code = HttpStatusCode.NotFound,
+                    Error_code = HttpStatusCode.InternalServerError,
                     Messages = ex.Message.ToString(),
                     Data = ""
                 };
@@ -112,7 +153,7 @@ namespace USSD.API.Controllers
                 var res = new
                 {
                     Success = false,
-                    Error_code = HttpStatusCode.NotFound,
+                    Error_code = HttpStatusCode.InternalServerError,
                     Messages = ex.Message.ToString(),
                     Data = ""
                 };
