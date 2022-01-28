@@ -10,11 +10,11 @@ namespace USSD.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string TitleUz { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string TitleRu { get; set; }
 
         [Required]
