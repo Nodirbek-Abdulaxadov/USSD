@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
-using USSD.Data.Models;
 using USSD.Data.Services;
 
 namespace USSD.API.Controllers
@@ -23,91 +19,40 @@ namespace USSD.API.Controllers
         [HttpGet, Route("getall/{subCategoryId}")]
         public async Task<IActionResult> GetAllBySCIdAsync(int subCategoryId)
         {
-            try
-            {
-                var categories = await _service.GetProductsBySubCategory(subCategoryId);
-                var res = new
+            var contacts = await _service.GetProductsBySubCategory(subCategoryId);
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Tanlangan subkategoriyaga tegishli barcha productlar ro'yxati",
-                    Data = categories
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.NotFound,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("getall")]
         public async Task<IActionResult> GetAllAsync()
         {
-            try
-            {
-                var categories = await _service.GetProducts();
-                var res = new
+            var contacts = await _service.GetProducts();
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Barcha productlar ro'yxati",
-                    Data = categories
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.NotFound,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("get/{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            try
-            {
-                var categories = await _service.GetProduct(id);
-                var res = new
+            var contacts = await _service.GetProduct(id);
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Tanlangan product",
-                    Data = categories
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.NotFound,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
     }
 }

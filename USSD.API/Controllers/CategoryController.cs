@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
-using USSD.API.ApiModels;
-using USSD.Data.Models;
 using USSD.Data.Services;
 
 namespace USSD.API.Controllers
@@ -24,102 +19,40 @@ namespace USSD.API.Controllers
         [HttpGet, Route("getall/json")]
         public async Task<IActionResult> GetAllJsonAsync()
         {
-            try
-            {
-                var categories = await _service.GetCategoriesJson();
-                var res = new
+            var contacts = await _service.GetCategoriesJson();
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Kategoriyalar ro'yxati",
-                    Data = categories
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.NotFound,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("getall")]
         public async Task<IActionResult> GetAllAsync()
         {
-            try
-            {
-                var categories = await _service.GetCategories();
-                List<CategoryModel> list = new List<CategoryModel>();
-                foreach (var o in categories)
+            var contacts = await _service.GetCategories();
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    CategoryModel categoryModel = new CategoryModel()
-                    {
-                        Id = o.Id,
-                        CategoryName = o.CategoryName,
-                        OperatorId = o.OperatorId
-                    };
-                    list.Add(categoryModel);
-                }
-                var res = new
-                {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Kategoriyalar ro'yxati",
-                    Data = list
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.NotFound,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("get/{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            try
-            {
-                var category = await _service.GetCategory(id);
-                var res = new
+            var contacts = await _service.GetCategory(id);
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Tanlangan kategoriya",
-                    Data = category
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.NotFound,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
     }
 }

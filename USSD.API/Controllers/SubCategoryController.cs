@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
-using USSD.API.ApiModels;
 using USSD.Data.Services;
 
 namespace USSD.API.Controllers
@@ -23,143 +19,53 @@ namespace USSD.API.Controllers
         [HttpGet, Route("getall/json")]
         public async Task<IActionResult> GetAllJsonAsync()
         {
-            try
-            {
-                var categories = await _service.GetSubCategoriesJson();
-                var res = new
+            var contacts = await _service.GetSubCategoriesJson();
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Subkategoriyalar ro'yxati",
-                    Data = categories
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.InternalServerError,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("getall/{categoryId}")]
         public async Task<IActionResult> GetAllByCategoryIdAsync(int categoryId)
         {
-            try
-            {
-                var categories = await _service.GetAllByCategoryId(categoryId);
-                List<SubCategoryModel> list = new List<SubCategoryModel>();
-                foreach (var o in categories)
+            var contacts = await _service.GetAllByCategoryId(categoryId);
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    SubCategoryModel subcategoryModel = new SubCategoryModel()
-                    {
-                        Id = o.Id,
-                        SubCategoryName = o.SubCategoryName,
-                        CategoryId = o.CategoryId
-                    };
-                    list.Add(subcategoryModel);
-                }
-                var res = new
-                {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Tanlangan kategoriyaga tegishli barcha subKategoriyalar ro'yxati",
-                    Data = list
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.InternalServerError,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("getall")]
         public async Task<IActionResult> GetAllAsync()
         {
-            try
-            {
-                var categories = await _service.GetSubCategories();
-                List<SubCategoryModel> list = new List<SubCategoryModel>();
-                foreach (var o in categories)
+            var contacts = await _service.GetSubCategories();
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    SubCategoryModel subcategoryModel = new SubCategoryModel()
-                    {
-                        Id = o.Id,
-                        SubCategoryName = o.SubCategoryName,
-                        CategoryId = o.CategoryId
-                    };
-                    list.Add(subcategoryModel);
-                }
-                var res = new
-                {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "SubKategoriyalar ro'yxati",
-                    Data = list
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.InternalServerError,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
 
         [HttpGet, Route("get/{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            try
-            {
-                var categories = await _service.GetSubCategory(id);
-                var res = new
+            var contacts = await _service.GetSubCategory(id);
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                new JsonSerializerSettings
                 {
-                    Success = true,
-                    StatusCode = HttpStatusCode.OK,
-                    Messages = "Tanlangan Subkategoriya",
-                    Data = categories
-                };
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                var res = new
-                {
-                    Success = false,
-                    Error_code = HttpStatusCode.InternalServerError,
-                    Messages = ex.Message.ToString(),
-                    Data = ""
-                };
-
-                return NotFound(res);
-            }
+            return Ok(json);
         }
     }
 }
