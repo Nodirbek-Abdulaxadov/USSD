@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using USSD.Data.Models;
 using USSD.Data.Services;
 
 namespace USSD.API.Controllers
@@ -45,8 +47,10 @@ namespace USSD.API.Controllers
         [HttpGet, Route("get/{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            var contacts = await _service.GetCategory(id);
-            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+            Category contacts = await _service.GetCategory(id);
+            List<Category> categories = new List<Category>();
+            categories.Add(contacts);
+            var json = JsonConvert.SerializeObject(categories, Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
