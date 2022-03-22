@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USSD.API", "USSD.API\USSD.API.csproj", "{EFDF6B15-5AF5-4260-8F30-9D86AEF84AA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USSD.API", "USSD.API\USSD.API.csproj", "{EFDF6B15-5AF5-4260-8F30-9D86AEF84AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USSD.Data", "USSD.Data\USSD.Data.csproj", "{C8DDCD42-DE6E-4AC4-A2E9-60CB7ACB3363}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USSD.Data", "USSD.Data\USSD.Data.csproj", "{C8DDCD42-DE6E-4AC4-A2E9-60CB7ACB3363}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USSD.Admin", "USSD.Admin\USSD.Admin.csproj", "{9EC4A944-3A35-403E-ACA3-91ADD82BA0AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C8DDCD42-DE6E-4AC4-A2E9-60CB7ACB3363}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8DDCD42-DE6E-4AC4-A2E9-60CB7ACB3363}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8DDCD42-DE6E-4AC4-A2E9-60CB7ACB3363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC4A944-3A35-403E-ACA3-91ADD82BA0AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC4A944-3A35-403E-ACA3-91ADD82BA0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC4A944-3A35-403E-ACA3-91ADD82BA0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC4A944-3A35-403E-ACA3-91ADD82BA0AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Opetators Page";
+}
+
+@model List<Operator>
+
+<div class="main-content">
+        <header>
+            <div class="user-wrapper">
+                <img src="~/Images/user.png" width="40" height="40" alt="" />
+                <div>
+                    <h4>Nodirbek Abdulaxadov</h4>
+                    <small>Supper admin</small>
+                </div>
+            </div>
+            @*<h5>
+                <a href="">O'zb</a> |
+                <a href="">Rus</a>
+            </h5>*@
+        </header>
+
+        <main>            
+            <div class="blok">
+                <div class="container">
+                    <div class="box data-table">
+                        <div class="box-header position-relative table-header pt-2">
+                            <div class="d-flex justify-content-between mt-3 mx-4 com-header">
+                                <h3>Operatorlar</h3>
+                                <span class="btn btn-success"><i class="las la-plus"></i> Yangi qo'shish</span>
+                            </div>
+                        </div>
+                        <div class="jadval box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Operator nomi</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach (var item in Model)
+                               {
+                                   <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.OpeatorName</td>
+                                    <td>
+                                        <span class="btn btn-success">Tahrirlash</span>
+                                        <span class="btn btn-danger">O'chirish</span>
+                                    </td>
+                                </tr>
+                               }
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+            </div>
+        </main>
+</div>

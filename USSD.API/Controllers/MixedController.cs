@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
 using USSD.Data.Services;
 
@@ -19,14 +20,21 @@ namespace USSD.API.Controllers
         [HttpGet, Route("getbyId")]
         public async Task<IActionResult> GetById(int operatorId, int categoryId)
         {
-            var contacts = await _mixedService.GetCategories(operatorId, categoryId);
-            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
+            try
+            {
+                var contacts = await _mixedService.GetCategories(operatorId, categoryId);
+                var json = JsonConvert.SerializeObject(contacts, Formatting.Indented,
+                    new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
 
-            return Ok(json);
+                return Ok(json);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
