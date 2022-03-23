@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Product Add Page";
+}
+
+@model Product
+
+<div class="main-content">
+        <header>
+            <div class="user-wrapper">
+                <img src="~/images/user.png" width="40" height="40" alt="" />
+                <div>
+                    <h4>Nodirbek Abdulaxadov</h4>
+                    <small>Supper admin</small>
+                </div>
+            </div>
+
+            @*<h5>
+                <a href="">O'zb</a> |
+                <a href="">Rus</a>
+            </h5>*@
+        </header>
+
+        <main>
+            <div class="box-header position-relative table-header mt-2">
+                <div class="d-flex justify-content-between mt-3 com-header">
+                    <h3>Yangi operator qo'shish</h3>
+                </div>
+            </div>
+            <form asp-controller="category" asp-action="add" method="post">        
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="Id"></label>
+                    <input type="text" class="form-control" asp-for="Id" placeholder="Product Id">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="TitleUz">TitleUz</label>
+                    <input type="text" class="form-control" asp-for="TitleUz" placeholder="TitleUz">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="TitleRu">TitleRu</label>
+                    <input type="text" class="form-control" asp-for="TitleRu" placeholder="TitleRu">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="DescriptionUz">DescriptionUz</label>
+                    <textarea asp-for="DescriptionUz" class="form-control" id="description" placeholder="DescriptionUz"></textarea>
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="DescriptionRu">DescriptionRu</label>
+                    <textarea asp-for="DescriptionRu" class="form-control" id="description" placeholder="DescriptionRu"></textarea>
+                </div>
+                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="ExpiryDate">ExpiryDate</label>
+                    <input type="text" class="form-control" asp-for="ExpiryDate" placeholder="ExpiryDate">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="Valume">Valume</label>
+                    <input type="text" class="form-control" asp-for="Valume" placeholder="Valume">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="Price">Price</label>
+                    <input type="text" class="form-control" asp-for="Valume" placeholder="Valume">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="Code">Code</label>
+                    <input type="text" class="form-control" asp-for="Code" placeholder="Code">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="SubCategoryId">SubCategoryId</label>
+                    <input type="text" class="form-control" asp-for="SubCategoryId" placeholder="SubCategoryId">
+                </div>
+                <div class="button-group d-flex justify-content-lg-center">
+                    <a asp-controller="operator" asp-action="index" class="mx-2">
+                        <span class="btn btn-info" style="width: 120px;">Bekor qilish</span>
+                    </a>
+                    <button type="submit" class="btn btn-success mx-2" style="width: 120px;">
+                        Saqlash
+                    </button>
+                </div>
+            </form>
+
+        </main>
+</div>
+

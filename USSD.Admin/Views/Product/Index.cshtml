@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Product Page";
+}
+
+@model List<Product>
+<div class="main-content">
+        <header>
+            <div class="user-wrapper">
+                <img src="~/Images/user.png" width="40" height="40" alt="" />
+                <div>
+                    <h4>Nodirbek Abdulaxadov</h4>
+                    <small>Supper admin</small>
+                </div>
+            </div>
+            @*<h5>
+                <a href="">O'zb</a> |
+                <a href="">Rus</a>
+            </h5>*@
+        </header>
+
+        <main>            
+            <div class="blok">
+                <div class="container">
+                    <div class="box data-table">
+                        <div class="box-header position-relative table-header pt-2">
+                            <div class="d-flex justify-content-between mt-3 mx-4 com-header">
+                                <h3>Operatorlar</h3>
+                                <a asp-controller="product" asp-action="add"><span class="btn btn-success"><i class="las la-plus"></i> Yangi qo'shish</span></a>
+                            </div>
+                        </div>
+                        <div class="jadval box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>UZB Sarlavha</th>
+                                    <th>RUS Sarlavha</th>
+                                    <th>UZB Batafsil</th>
+                                    <th>RUS Batafsil</th>
+                                    <th>Muddati</th>
+                                    <th>Valume</th>
+                                    <th>Narxi</th>
+                                    <th>Kodi</th>
+                                    <th>SubKategoriya Id</th>
+                                    <th style="text-align:center;">Action</th>
+                                </tr>
+                            @{
+                                     foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.TitleUz</td>
+                                            <td>@item.TitleRu</td>
+                                            <td>@item.DescriptionUz</td>
+                                            <td>@item.DescriptionRu</td>
+                                            <td>@item.ExpiryDate</td>
+                                            <td>@item.Valume</td>
+                                            <td>@item.Price</td>
+                                            <td>@item.Code</td>
+                                            <td>@item.SubCategoryId</td>
+                                            <td>
+                                                <a asp-controller="product" asp-action="edit" asp-route-id="@item.Id" class="btn btn-success text-white">Tahrirlash</a>
+                                                <a asp-controller="product" asp-action="delete" asp-route-id="@item.Id" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');" class="btn btn-danger text-white">O'chirish</a>
+                                            </td>
+                                        </tr>
+                                    }
+                             }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+</div>
+
