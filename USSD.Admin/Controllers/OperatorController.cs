@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using USSD.Data.Models;
 using USSD.Data.Services;
 
 namespace USSD.Admin.Controllers
@@ -19,19 +20,37 @@ namespace USSD.Admin.Controllers
             return View(listOperators);
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        public async Task<IActionResult> AddAsync(Operator newOperator)
         {
-            return View();
+            await _operatorService.AddOperator(newOperator);
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Delete()
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            Operator @operator = await _operatorService.GetOperator(id);
+            return View(@operator);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Operator @operator)
+        {
+            await _operatorService.UpdateOperator(@operator);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _operatorService.DeleteOperator(id);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -159,13 +159,14 @@ header h4 {
     }
 
 .button-group {
-    justify-content: space-around;
+    display: flex;
+    justify-content: flex-end;
 }
 
-    .button-group a {
-        width: 120px;
-        font-size: 1rem
-    }
+.button-group a {
+    width: 120px;
+    font-size: 1rem
+}
 
 main {
     padding: 4rem 1.5rem;

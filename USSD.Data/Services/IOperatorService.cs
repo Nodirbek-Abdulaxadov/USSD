@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using USSD.Data.Models;
 
@@ -14,6 +11,6 @@ namespace USSD.Data.Services
         Task<Operator> GetOperator(int id);
         Task<Operator> AddOperator(Operator operatr);
         Task<Operator> UpdateOperator(Operator operatr);
-        Task DeleteOperator(int id);
+        void DeleteOperator(int id);
     }
 }

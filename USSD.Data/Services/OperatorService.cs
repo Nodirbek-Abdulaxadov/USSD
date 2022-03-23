@@ -19,15 +19,16 @@ namespace USSD.Data.Services
         }
         public Task<Operator> AddOperator(Operator operatr)
         {
-            _dbContext.Operators.AddAsync(operatr);
-            _dbContext.SaveChangesAsync();
+            _dbContext.Operators.Add(operatr);
+            _dbContext.SaveChanges();
             return Task.FromResult(operatr);
         }
 
-        public async Task DeleteOperator(int id)
+        public void DeleteOperator(int id)
         {
-            _dbContext.Operators.Remove(await _dbContext.Operators.FirstOrDefaultAsync(o => o.Id == id));
-            await _dbContext.SaveChangesAsync();
+            var p = _dbContext.Operators.FirstOrDefault(o => o.Id == id);
+            _dbContext.Operators.Remove(p);
+            _dbContext.SaveChanges();
         }
 
         public async Task<Operator> GetOperator(int id)
@@ -60,7 +61,7 @@ namespace USSD.Data.Services
         public Task<Operator> UpdateOperator(Operator operatr)
         {
             _dbContext.Operators.Update(operatr);
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return Task.FromResult(operatr);
         }
     }
