@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Opetators Page";
+    ViewData["Title"] = "Category Page";
 }
 
 @model List<Category>
@@ -33,25 +33,38 @@
                             <table class="table table-hover">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Operator nomi</th>
+                                    <th>Kategoriya nomi</th>
                                     <th>Operator Id</th>
+                                    <th>Sub kategoryiyalar</th>
                                     <th>Action</th>
                                 </tr>
-                                @foreach (var item in Model)
-                               {
-                                   <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.CategoryName</td>
-                                    <td>@item.OperatorId</td>
-                                    <td>
-                                        <a asp-controller="operator" asp-action="edit" asp-route-id="@item.Id" class="btn btn-success text-white">Tahrirlash</a>
-                                        <a asp-controller="operator" asp-action="delete" asp-route-id="@item.Id" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');" class="btn btn-danger text-white">O'chirish</a>
-                                    </td>
-                                </tr>
-                               }
+                              <tr>
+                            @{  
+                                if(Model == null)
+                                {
+                                <td>
+                                   Nothing anything
+                                </td>
+                                }
+                                else
+                                {
+                                     foreach (var item in Model)
+                                    {
+                                        <td>@item.Id</td>
+                                        <td>@item.CategoryName</td>
+                                        <td>@item.OperatorId</td>
+                                        <td>@item.SubCategories</td>
+                                        <td style="text-align:center;">
+                                            <a asp-controller="operator" asp-action="edit" asp-route-id="@item.Id" class="btn btn-success text-white">Tahrirlash</a>
+                                            <a asp-controller="operator" asp-action="delete" asp-route-id="@item.Id" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');" class="btn btn-danger text-white">O'chirish</a>
+                                        </td>
+                                    }
+                                }
+                             }
+                               </tr>
                             </table>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

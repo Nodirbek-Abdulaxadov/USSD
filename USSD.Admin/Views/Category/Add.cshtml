@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Category Add Page";
+}
+
+@model Category
+
+<div class="main-content">
+        <header>
+            <div class="user-wrapper">
+                <img src="~/images/user.png" width="40" height="40" alt="" />
+                <div>
+                    <h4>Nodirbek Abdulaxadov</h4>
+                    <small>Supper admin</small>
+                </div>
+            </div>
+
+            @*<h5>
+                <a href="">O'zb</a> |
+                <a href="">Rus</a>
+            </h5>*@
+        </header>
+
+        <main>
+            <div class="box-header position-relative table-header mt-2">
+                <div class="d-flex justify-content-between mt-3 com-header">
+                    <h3>Yangi operator qo'shish</h3>
+                </div>
+            </div>
+            <form asp-controller="operator" asp-action="add" method="post">        
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="Id"></label>
+                    <input type="text" class="form-control" asp-for="Id" placeholder="Operator Id">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="CategoryName">OperatorName</label>
+                    <input type="text" class="form-control" asp-for="CategoryName" placeholder="Ketagoriya nomi">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="OperatorId">OperatorName</label>
+                    <input type="text" class="form-control" asp-for="OperatorId" placeholder="Operator nomi">
+                </div>
+                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="SubCategories">SubCategories</label>
+                    <input type="text" class="form-control" asp-for="SubCategories" placeholder="Subkategoriya nomi">
+                </div>
+                <div class="button-group d-flex justify-content-lg-center">
+                    <a asp-controller="operator" asp-action="index" class="mx-2">
+                        <span class="btn btn-info" style="width: 120px;">Bekor qilish</span>
+                    </a>
+                    <button type="submit" class="btn btn-success mx-2" style="width: 120px;">
+                        Saqlash
+                    </button>
+                </div>
+            </form>
+
+        </main>
+    </div>
