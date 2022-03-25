@@ -20,15 +20,16 @@ namespace USSD.Data.Services
 
         public Task<Category> AddCategory(Category category)
         {
-            _dbContext.Categories.AddAsync(category);
-            _dbContext.SaveChangesAsync();
+            _dbContext.Categories.Add(category);
+            _dbContext.SaveChanges();
             return Task.FromResult(category);
         }
 
         public async Task DeleteCategory(int id)
         {
             _dbContext.Categories.Remove(_dbContext.Categories.FirstOrDefault(c => c.Id == id));
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
+
         }
 
         public Task<List<Category>> GetCategories()
@@ -59,7 +60,7 @@ namespace USSD.Data.Services
         public Task<Category> UpdateCategory(Category category)
         {
             _dbContext.Categories.Update(category);
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return Task.FromResult(category);
         }
     }

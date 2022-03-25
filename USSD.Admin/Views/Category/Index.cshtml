@@ -35,20 +35,16 @@
                                     <th>Id</th>
                                     <th>Kategoriya nomi</th>
                                     <th>Operator Id</th>
-                                    <th>Sub kategoryiyalar</th>
                                     <th style="text-align:center;">Action</th>
                                 </tr>
                               
                             @{
-                                
-
                                 foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>@item.Id</td>
                                         <td>@item.CategoryName</td>
                                         <td>@item.OperatorId</td>
-                                        <td>@item.SubCategories</td>
                                         <td>
                                             <a asp-controller="category" asp-action="edit" asp-route-id="@item.Id" class="btn btn-success text-white">Tahrirlash</a>
                                             <a asp-controller="category" asp-action="delete" asp-route-id="@item.Id" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');" class="btn btn-danger text-white">O'chirish</a>
