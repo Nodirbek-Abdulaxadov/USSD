@@ -16,6 +16,7 @@ namespace USSD.Data.DataLayer
 
         }
 
+        public DbSet<CheckModel> CheckUpdates { get; set; }
         public DbSet<Operator> Operators { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }

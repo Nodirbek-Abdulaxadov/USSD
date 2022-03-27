@@ -10,5 +10,8 @@ namespace USSD.Data.Services
         Task<List<SubCategory>> GetSubCategories();
         Task<List<SubCategory>> GetSubCategoriesJson();
         Task<SubCategory> GetSubCategory(int id);
+        Task<SubCategory> Add(SubCategory subCategory);
+        Task<SubCategory> Update(SubCategory subCategory);
+        void Delete(int id);
     }
 }

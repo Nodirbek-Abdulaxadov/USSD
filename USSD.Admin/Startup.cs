@@ -28,7 +28,8 @@ namespace USSD.Admin
             services.AddTransient<IMixedService, MixedService>();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")), ServiceLifetime.Scoped);
+                options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")), ServiceLifetime.Transient);
+
             services.AddControllersWithViews();
         }
 

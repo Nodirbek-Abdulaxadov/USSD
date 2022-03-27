@@ -43,5 +43,39 @@ namespace USSD.Data.Services
         {
             return _dbContext.SubCategories.Where(sc => sc.CategoryId == categoryId).ToListAsync();
         }
+
+        public void NewUpdate()
+        {
+            CheckModel checkModel = _dbContext.CheckUpdates.FirstOrDefault(p => p.Id == 777);
+            checkModel.DatabaseVersion++;
+            checkModel.LastUpdated = DateTime.Now.ToString();
+            _dbContext.CheckUpdates.Update(checkModel);
+            _dbContext.SaveChanges();
+        }
+
+        public Task<SubCategory> Add(SubCategory subCategory)
+        {
+            _dbContext.SubCategories.Add(subCategory);
+            NewUpdate();
+            _dbContext.SaveChanges();
+
+            return Task.FromResult(subCategory);
+        }
+
+        public Task<SubCategory> Update(SubCategory subCategory)
+        {
+            _dbContext.SubCategories.Update(subCategory);
+            NewUpdate();
+            _dbContext.SaveChanges();
+
+            return Task.FromResult(subCategory);
+        }
+
+        public void Delete(int id)
+        {
+            _dbContext.SubCategories.Remove(_dbContext.SubCategories.FirstOrDefault(p => p.Id == id));
+            NewUpdate();
+            _dbContext.SaveChanges();
+        }
     }
 }

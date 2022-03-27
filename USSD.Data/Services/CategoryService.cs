@@ -21,6 +21,7 @@ namespace USSD.Data.Services
         public Task<Category> AddCategory(Category category)
         {
             _dbContext.Categories.Add(category);
+            NewUpdate();
             _dbContext.SaveChanges();
             return Task.FromResult(category);
         }
@@ -28,8 +29,8 @@ namespace USSD.Data.Services
         public async Task DeleteCategory(int id)
         {
             _dbContext.Categories.Remove(_dbContext.Categories.FirstOrDefault(c => c.Id == id));
+            NewUpdate();
             _dbContext.SaveChanges();
-
         }
 
         public Task<List<Category>> GetCategories()
@@ -60,8 +61,18 @@ namespace USSD.Data.Services
         public Task<Category> UpdateCategory(Category category)
         {
             _dbContext.Categories.Update(category);
+            NewUpdate();
             _dbContext.SaveChanges();
             return Task.FromResult(category);
+        }
+
+        public void NewUpdate()
+        {
+            CheckModel checkModel = _dbContext.CheckUpdates.FirstOrDefault(p => p.Id == 777);
+            checkModel.DatabaseVersion++;
+            checkModel.LastUpdated = DateTime.Now.ToString();
+            _dbContext.CheckUpdates.Update(checkModel);
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -21,10 +21,6 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="../index.html"><span class="las la-home"></span>
-                        <span>Bosh sahifa</span></a>
-                </li>
-                <li>
                     <a asp-controller="operator" asp-action="index"><span class="las la-rss"></span>
                         <span>Operatorlar</span></a>
                 </li>
@@ -34,15 +30,11 @@
                 </li>
                 <li>
                     <a asp-controller="product" asp-action="index"><span class="las la-rss"></span>
-                        <span>Kategoriyalar</span></a>
-                </li>
-                <li>
-                    <a href=""><span class="las la-rss"></span>
-                        <span>SubKategoriyalar</span></a>
-                </li>
-                <li>
-                    <a href=""><span class="las la-rss"></span>
                         <span>Produktlar</span></a>
+                </li>
+                <li>
+                    <a asp-controller="subcategory" asp-action="index"><span class="las la-rss"></span>
+                        <span>SubKategoriyalar</span></a>
                 </li>
                 <li class="out">
                     <a href=""><span><i class="las la-arrow-circle-left"></i></span>

@@ -19,15 +19,17 @@ namespace USSD.Data.Services
         }
         public Task<Product> AddProduct(Product operatr)
         {
-            _dbContext.Products.AddAsync(operatr);
-            _dbContext.SaveChangesAsync();
+            _dbContext.Products.Add(operatr);
+            NewUpdate();
+            _dbContext.SaveChanges();
             return Task.FromResult(operatr);
         }
 
         public async Task DeleteProduct(int id)
         {
-            _dbContext.Products.Remove(await _dbContext.Products.FirstOrDefaultAsync(o => o.Id == id));
-            await _dbContext.SaveChangesAsync();
+            _dbContext.Products.Remove(_dbContext.Products.FirstOrDefault(o => o.Id == id));
+            NewUpdate();
+            _dbContext.SaveChanges();
         }
 
         public async Task<Product> GetProduct(int id)
@@ -49,8 +51,18 @@ namespace USSD.Data.Services
         public Task<Product> UpdateProduct(Product operatr)
         {
             _dbContext.Products.Update(operatr);
-            _dbContext.SaveChangesAsync();
+            NewUpdate();
+            _dbContext.SaveChanges();
             return Task.FromResult(operatr);
+        }
+
+        public void NewUpdate()
+        {
+            CheckModel checkModel = _dbContext.CheckUpdates.FirstOrDefault(p => p.Id == 777);
+            checkModel.DatabaseVersion++;
+            checkModel.LastUpdated = DateTime.Now.ToString();
+            _dbContext.CheckUpdates.Update(checkModel);
+            _dbContext.SaveChanges();
         }
     }
 }

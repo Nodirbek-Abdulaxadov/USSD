@@ -20,4 +20,8 @@
     <ProjectReference Include="..\USSD.Data\USSD.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\" />
+  </ItemGroup>
+
 </Project>

@@ -20,6 +20,7 @@ namespace USSD.Data.Services
         public Task<Operator> AddOperator(Operator operatr)
         {
             _dbContext.Operators.Add(operatr);
+            NewUpdate();
             _dbContext.SaveChanges();
             return Task.FromResult(operatr);
         }
@@ -28,6 +29,7 @@ namespace USSD.Data.Services
         {
             var p = _dbContext.Operators.FirstOrDefault(o => o.Id == id);
             _dbContext.Operators.Remove(p);
+            NewUpdate();
             _dbContext.SaveChanges();
         }
 
@@ -61,8 +63,23 @@ namespace USSD.Data.Services
         public Task<Operator> UpdateOperator(Operator operatr)
         {
             _dbContext.Operators.Update(operatr);
+            NewUpdate();
             _dbContext.SaveChanges();
             return Task.FromResult(operatr);
+        }
+
+        public void NewUpdate()
+        {
+            CheckModel checkModel = _dbContext.CheckUpdates.FirstOrDefault(p => p.Id == 777);
+            checkModel.DatabaseVersion++;
+            checkModel.LastUpdated = DateTime.Now.ToString();
+            _dbContext.CheckUpdates.Update(checkModel);
+            _dbContext.SaveChanges();
+        }
+
+        public Task<List<CheckModel>> GetCheckUpdates()
+        {
+            return Task.FromResult(_dbContext.CheckUpdates.ToList());
         }
     }
 }
