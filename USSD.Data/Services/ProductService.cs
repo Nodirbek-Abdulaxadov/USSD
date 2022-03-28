@@ -39,7 +39,7 @@ namespace USSD.Data.Services
 
         public Task<List<Product>> GetProducts()
         {
-            return _dbContext.Products.ToListAsync();
+            return _dbContext.Products.Skip(10).Take(10).ToListAsync();
         }
 
         public async Task<List<Product>> GetProductsBySubCategory(int subId)
