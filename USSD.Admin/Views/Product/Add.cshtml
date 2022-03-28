@@ -2,7 +2,7 @@
     ViewData["Title"] = "Product Add Page";
 }
 
-@model Product
+@model ProductAddViewModel
 
 <div class="main-content">
         <header>
@@ -26,49 +26,55 @@
                     <h3>Yangi operator qo'shish</h3>
                 </div>
             </div>
-            <form asp-controller="category" asp-action="add" method="post">        
+            <form asp-controller="product" asp-action="add" method="post">        
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="Id"></label>
-                    <input type="text" class="form-control" asp-for="Id" placeholder="Product Id">
+                    <label asp-for="product.Id"></label>
+                    <input type="text" class="form-control" asp-for="product.Id" placeholder="Product Id">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="TitleUz">TitleUz</label>
-                    <input type="text" class="form-control" asp-for="TitleUz" placeholder="TitleUz">
+                    <label asp-for="product.TitleUz">TitleUz</label>
+                    <input type="text" class="form-control" asp-for="product.TitleUz" placeholder="TitleUz">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="TitleRu">TitleRu</label>
-                    <input type="text" class="form-control" asp-for="TitleRu" placeholder="TitleRu">
+                    <label asp-for="product.TitleRu">TitleRu</label>
+                    <input type="text" class="form-control" asp-for="product.TitleRu" placeholder="TitleRu">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="DescriptionUz">DescriptionUz</label>
-                    <textarea asp-for="DescriptionUz" class="form-control" id="description" placeholder="DescriptionUz"></textarea>
+                    <label asp-for="product.DescriptionUz">DescriptionUz</label>
+                    <textarea asp-for="product.DescriptionUz" class="form-control" id="description" placeholder="DescriptionUz"></textarea>
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="DescriptionRu">DescriptionRu</label>
-                    <textarea asp-for="DescriptionRu" class="form-control" id="description" placeholder="DescriptionRu"></textarea>
+                    <label asp-for="product.DescriptionRu">DescriptionRu</label>
+                    <textarea asp-for="product.DescriptionRu" class="form-control" id="description" placeholder="DescriptionRu"></textarea>
                 </div>
                  <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="ExpiryDate">ExpiryDate</label>
-                    <input type="text" class="form-control" asp-for="ExpiryDate" placeholder="ExpiryDate">
+                    <label asp-for="product.ExpiryDate">ExpiryDate</label>
+                    <input type="text" class="form-control" asp-for="product.ExpiryDate" placeholder="ExpiryDate">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="Valume">Valume</label>
-                    <input type="text" class="form-control" asp-for="Valume" placeholder="Valume">
+                    <label asp-for="product.Valume">Valume</label>
+                    <input type="text" class="form-control" asp-for="product.Valume" placeholder="Valume">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="Price">Price</label>
-                    <input type="text" class="form-control" asp-for="Valume" placeholder="Valume">
+                    <label asp-for="product.Price">Price</label>
+                    <input type="text" class="form-control" asp-for="product.Price" placeholder="Valume">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="Code">Code</label>
-                    <input type="text" class="form-control" asp-for="Code" placeholder="Code">
+                    <label asp-for="product.Code">Code</label>
+                    <input type="text" class="form-control" asp-for="product.Code" placeholder="Code">
                 </div>
-                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="SubCategoryId">SubCategoryId</label>
-                    <input type="text" class="form-control" asp-for="SubCategoryId" placeholder="SubCategoryId">
+             <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+                    <label asp-for="product.SubCategoryId"></label><br/>
+                    @*<input type="text" class="form-control" asp-for="OperatorId">*@
+                    <select class="form-select" style="width: 100%; padding: 5px;" asp-for="@Model.product.SubCategoryId">
+                        @foreach (var item in Model.subCategories)
+                           {
+                                <option value=@item.Id>@item.SubCategoryName</option>
+                           }
+                    </select>
                 </div>
                 <div class="button-group d-flex justify-content-lg-center">
-                    <a asp-controller="operator" asp-action="index" class="mx-2">
+                    <a asp-controller="product" asp-action="index" class="mx-2">
                         <span class="btn btn-info" style="width: 120px;">Bekor qilish</span>
                     </a>
                     <button type="submit" class="btn btn-success mx-2" style="width: 120px;">

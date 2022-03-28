@@ -77,5 +77,8 @@ namespace USSD.Data.Services
             NewUpdate();
             _dbContext.SaveChanges();
         }
+
+        public Task<SubCategory> GetSubCategoryNoList(int id) => _dbContext.SubCategories.FirstOrDefaultAsync(p => p.Id == id);
+        
     }
 }

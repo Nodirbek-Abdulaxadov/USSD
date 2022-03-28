@@ -2,7 +2,7 @@
     ViewData["Title"] = "Product Page";
 }
 
-@model List<Product>
+@model List<ProductViewModel>
 <div class="main-content">
         <header>
             <div class="user-wrapper">
@@ -33,14 +33,10 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>UZB Sarlavha</th>
-                                    <th>RUS Sarlavha</th>
                                     <th>UZB Batafsil</th>
-                                    <th>RUS Batafsil</th>
                                     <th>Muddati</th>
-                                    <th>Valume</th>
                                     <th>Narxi</th>
                                     <th>Kodi</th>
-                                    <th>SubKategoriya Id</th>
                                     <th style="text-align:center;">Action</th>
                                 </tr>
                             @{
@@ -49,17 +45,23 @@
                                         <tr>
                                             <td>@item.Id</td>
                                             <td>@item.TitleUz</td>
-                                            <td>@item.TitleRu</td>
-                                            <td>@item.DescriptionUz</td>
-                                            <td>@item.DescriptionRu</td>
+                                            <td>
+                                                @{
+                                                    string text = item.DescriptionUz;
+                                                    if (text.Length > 15)
+                                                    {
+                                                        text = item.DescriptionUz.Substring(0, 15);
+                                                    }
+                                                }
+                                                @text...
+                                            </td>
                                             <td>@item.ExpiryDate</td>
-                                            <td>@item.Valume</td>
                                             <td>@item.Price</td>
                                             <td>@item.Code</td>
-                                            <td>@item.SubCategoryId</td>
                                             <td>
                                                 <a asp-controller="product" asp-action="edit" asp-route-id="@item.Id" class="btn btn-success text-white">Tahrirlash</a>
                                                 <a asp-controller="product" asp-action="delete" asp-route-id="@item.Id" onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?');" class="btn btn-danger text-white">O'chirish</a>
+                                                <a asp-controller="product" asp-action="viewmore" asp-route-id="@item.Id" class="btn btn-success text-white">Batafsil</a>
                                             </td>
                                         </tr>
                                     }
