@@ -6,6 +6,7 @@ namespace USSD.Data.Services
 {
     public interface IOperatorService
     {
+        Task<Operator> GetOperatorName(int id);
         Task<List<CheckModel>> GetCheckUpdates();
         Task<List<Operator>> GetOperatorsJson();
         Task<List<Operator>> GetOperators();

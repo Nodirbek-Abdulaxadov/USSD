@@ -29,7 +29,7 @@
             <form asp-controller="category" asp-action="edit" method="post">        
                 
                 <input type="hidden" asp-for="Id" value="@Model.Id">
-                
+
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
                     <label asp-for="CategoryName">CategoryName</label>
                     <input type="text" class="form-control" asp-for="CategoryName" value="@Model.CategoryName">
@@ -37,10 +37,6 @@
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
                     <label asp-for="OperatorId">OperatorId</label>
                     <input type="text" class="form-control" asp-for="OperatorId" value="@Model.OperatorId">
-                </div>
-                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="SubCategories">SubCategories</label>
-                    <input type="text" class="form-control" asp-for="OperatorId" value="@Model.SubCategories">
                 </div>
                 <div class="button-group d-flex justify-content-lg-center">
                     <a asp-controller="category" asp-action="index" class="mx-2">

@@ -1,8 +1,10 @@
-﻿@{
+﻿@using USSD.Admin.ViewModels
+@{
     ViewData["Title"] = "Category Add Page";
+    Layout = "_Layout";
 }
 
-@model Category
+@model CategoryAddViewModel
 
 <div class="main-content">
         <header>
@@ -23,21 +25,27 @@
         <main>
             <div class="box-header position-relative table-header mt-2">
                 <div class="d-flex justify-content-between mt-3 com-header">
-                    <h3>Yangi operator qo'shish</h3>
+                    <h3>Yangi kategoriya qo'shish</h3>
                 </div>
             </div>
             <form asp-controller="category" asp-action="add" method="post">        
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="Id"></label>
-                    <input type="text" class="form-control" asp-for="Id" placeholder="Kategoriya Id">
+                    <label asp-for="category.Id"></label>
+                    <input type="text" class="form-control" asp-for="category.Id" placeholder="Kategoriya Id">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="CategoryName"></label>
-                    <input type="text" class="form-control" asp-for="CategoryName" placeholder="Ketagoriya nomi">
+                    <label asp-for="category.CategoryName"></label>
+                    <input type="text" class="form-control" asp-for="category.CategoryName" placeholder="Ketagoriya nomi">
                 </div>
                 <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="OperatorId"></label>
-                    <input type="text" class="form-control" asp-for="OperatorId">
+                    <label asp-for="category.OperatorId"></label><br/>
+                    @*<input type="text" class="form-control" asp-for="OperatorId">*@
+                    <select class="form-select" style="width: 100%; padding: 5px;" asp-for="@Model.category.OperatorId">
+                        @foreach (var item in Model.operators)
+                           {
+                                <option value=@item.Id>@item.OpeatorName</option>
+                           }
+                    </select>
                 </div>
                 <div class="button-group d-flex justify-content-lg-center">
                     <a asp-controller="operator" asp-action="index" class="mx-2">

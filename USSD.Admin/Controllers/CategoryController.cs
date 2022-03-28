@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using USSD.Admin.ViewModels;
 using USSD.Data.Models;
 using USSD.Data.Services;
 
@@ -9,25 +11,44 @@ namespace USSD.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly IOperatorService _operatorService;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService,
+                                   IOperatorService operatorService)
         {
             _categoryService = categoryService;
+            _operatorService = operatorService;
         }
         public async  Task<IActionResult> Index()
         {
             var item = await _categoryService.GetCategories();
-            return View(item);
+            List<CategoryViewModel> categories = new List<CategoryViewModel>();
+            foreach (var category in item)
+            {
+                Operator @operator = await _operatorService.GetOperatorName(category.OperatorId);
+                CategoryViewModel categoryView = new CategoryViewModel()
+                {
+                    Id = category.Id,
+                    CategoryName = category.CategoryName,
+                    Operator = @operator
+                };
+                categories.Add(categoryView);
+            }
+            return View(categories);
         }
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            return View();
+            CategoryAddViewModel viewModel = new CategoryAddViewModel()
+            {
+                operators = await _operatorService.GetOperators()
+            };
+            return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(Category category)
+        public async Task<IActionResult> Add(CategoryAddViewModel viewModel)
         {
-            await _categoryService.AddCategory(category);
+            await _categoryService.AddCategory(viewModel.category);
             return RedirectToAction("Index");
         }
         [HttpGet]

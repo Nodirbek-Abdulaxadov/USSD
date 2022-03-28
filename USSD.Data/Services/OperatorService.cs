@@ -81,5 +81,10 @@ namespace USSD.Data.Services
         {
             return Task.FromResult(_dbContext.CheckUpdates.ToList());
         }
+
+        public Task<Operator> GetOperatorName(int id)
+        {
+            return Task.FromResult(_dbContext.Operators.FirstOrDefault(p => p.Id == id));
+        }
     }
 }
