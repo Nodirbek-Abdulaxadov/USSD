@@ -60,7 +60,7 @@ namespace USSD.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewMore()
         {
-            return View();
+          
         }
         public IActionResult Back()
         {
