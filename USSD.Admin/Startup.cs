@@ -28,7 +28,7 @@ namespace USSD.Admin
             services.AddTransient<IMixedService, MixedService>();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreDB")), ServiceLifetime.Transient);
+                options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")), ServiceLifetime.Scoped);
 
             services.AddControllersWithViews();
         }
