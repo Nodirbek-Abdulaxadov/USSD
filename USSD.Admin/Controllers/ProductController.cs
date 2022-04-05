@@ -58,9 +58,14 @@ namespace USSD.Admin.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public async Task<IActionResult> ViewMore()
+        public async Task<IActionResult> ViewMore(int id)
         {
-          
+            var list = await _productService.GetProduct(id);
+            ProductViewMoreViewModel viewModel = new ProductViewMoreViewModel()
+            {
+                products = list
+            };
+            return View(viewModel);
         }
         public IActionResult Back()
         {

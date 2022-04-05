@@ -1,54 +1,35 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "View More Page";
     Layout = "_Layout";
 }
+@using USSD.Admin.ViewModels
 @model ProductViewMoreViewModel
 <div class="main-content">
-     <main>
-         <div class="d-flex justify-content-between mt-3 mx-4 com-header">
-            <a asp-controller="products" asp-action="back"><span class="btn btn-success"><i class="las la-plus"></i>Orqaga qaytish</span></a>
+
+         <div class="d-flex justify-content-between mx-4 com-header">
+            <a asp-controller="product" asp-action="index" class="mb-5"><span class="btn btn-secondary"><i class="las la-arrow-left"></i>Orqaga qaytish</span></a>
          </div>
-            <input type="text" asp-for="products.Id" value="@Model.products.Id">
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.Id">Id</label>
-                <input type="text" asp-for="products.Id" value="@Model.products.Id">
+            <div class="mx-4">
+                <p>Id: @Model.products.Id</p>
+                <hr />
+                <p>TitleUz: @Model.products.TitleUz</p>
+                <hr />
+                <p>TitleUz: @Model.products.TitleUz</p>
+                <hr />
+                <p>Narxi: @Model.products.Price</p>
+                <hr />
+                <p>Code: @Model.products.Code</p>
+                <hr />
+                <p>ExpiryDate: @Model.products.ExpiryDate</p>
+                <hr />
+                <p>Valume: @Model.products.Valume</p>
+                <hr />
+                <p>DescriptionUz: @Model.products.DescriptionUz</p>
+                <hr /> <br/>
+                <p>DescriptionRu: @Model.products.DescriptionRu</p>
+                <hr />
             </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.TitleUz">TitleUz</label>
-                <input type="text" class="form-control" asp-for="products.TitleUz" value="@Model.products.TitleUz">
-            </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.TitleRu">TitleRu</label>
-                <input type="text" class="form-control" asp-for="products.TitleRu" value="@Model.products.TitleRu">
-            </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.DescriptionUz">DescriptionUz</label>
-                <textarea asp-for="products.DescriptionUz" class="form-control" id="description" placeholder="DescriptionUz">@Model.products.DescriptionUz</textarea>
-            </div>
-                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.DescriptionRu">DescriptionRu</label>
-                <textarea asp-for="products.DescriptionRu" class="form-control" id="description" placeholder="DescriptionRu">@Model.products.DescriptionRu</textarea>
-            </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.ExpiryDate">ExpiryDate</label>
-                <input type="text" class="form-control" asp-for="products.ExpiryDate" value="@Model.products.ExpiryDate">
-            </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.Valume">Valume</label>
-                <input type="text" class="form-control" asp-for="products.Valume" value="@Model.products.Valume">
-            </div>
-                <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.Price">Valume</label>
-                <input type="text" class="form-control" asp-for="products.Price" value="@Model.products.Price">
-            </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                <label asp-for="products.Code">Valume</label>
-                <input type="text" class="form-control" asp-for="products.Code" value="@Model.products.Code">
-            </div>
-            <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
-                    <label asp-for="subCategories.CategoryId"></label><br/>
-                    <input type="text" class="form-control" asp-for="subCategories.SubCategoryName" value="@Model.subCategories.SubCategoryName">
-             </div>
-     </main>
+
 </div>
                

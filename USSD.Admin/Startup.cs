@@ -22,10 +22,9 @@ namespace USSD.Admin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IOperatorService, OperatorService>();
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<ISubCategoryService, SubCategoryService>();
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<IMixedService, MixedService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISubCategoryService, SubCategoryService>();
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySqlDB"), MySqlServerVersion.Parse("5.7.37")), ServiceLifetime.Scoped);
